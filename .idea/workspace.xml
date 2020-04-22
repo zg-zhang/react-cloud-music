@@ -1,17 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a5d857f7-af3d-499e-a8a1-9d2a2d35e919" name="Default Changelist" comment="" />
+    <list default="true" id="00c1ce66-c394-455f-8e25-18f55c9d26d9" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/react-cloud-music-app.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ProjectId" id="1ZysQX0SNvVu15BtRwsMQpoRWrn" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1auq5lDmnn0fKcewp77PKblesqh" />
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="D:/迅雷下载/children_add" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -30,16 +44,27 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="a5d857f7-af3d-499e-a8a1-9d2a2d35e919" name="Default Changelist" comment="" />
-      <created>1585822652718</created>
+      <changelist id="00c1ce66-c394-455f-8e25-18f55c9d26d9" name="Default Changelist" comment="" />
+      <created>1587595645145</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1585822652718</updated>
-      <workItem from="1585822654256" duration="1571000" />
+      <updated>1587595645145</updated>
+      <workItem from="1587595646401" duration="13000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
