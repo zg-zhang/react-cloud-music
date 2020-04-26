@@ -40,6 +40,17 @@
 
 ```
 
+## 使用的第三方库
+
+* react-router
+* react-router-dom
+* react-router-config
+* redux
+* redux-thunk
+* redux-immutable
+* react-redux
+* immutable
+
 ## TODO
 
 * 使用 immer 替代 immutable 进行重构
