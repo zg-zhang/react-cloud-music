@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import { GlobalStyle } from "./style";
 import { IconStyle } from "./assets/iconfont/iconfont"
 import routes from './routes/index.js';
-import store from "./store/idnex";
+import store from "./store/index";
 
 function App() {
     return (

@@ -50,6 +50,7 @@
 * redux-immutable
 * react-redux
 * immutable
+* swiper
 
 ## TODO
 
