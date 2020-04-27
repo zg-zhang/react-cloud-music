@@ -51,6 +51,8 @@
 * react-redux
 * immutable
 * swiper
+* better-scroll@next
+* prop-types
 
 ## TODO
 

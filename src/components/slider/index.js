@@ -39,7 +39,7 @@ function Slider(props) {
                         })
                     }
                 </div>
-                <div className='swiper-pagination'></div>
+                <div className='swiper-pagination'/>
             </div>
         </SliderContainer>
     )
