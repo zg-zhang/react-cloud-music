@@ -53,9 +53,11 @@
 * swiper
 * better-scroll@next
 * prop-types
+* axios 
 
 ## TODO
 
 * 使用 immer 替代 immutable 进行重构
 * 使用 TypeScript 重构
+* 使用 react-redux 的 hooks 来替换，减少代码量，不污染 props 性能更好，useSelector useDispatch
 

@@ -59,7 +59,7 @@ export const ListItem = styled.div`
         }
     }
     
-    .des {
+    .desc {
         overflow: hidden;
         margin-top: 2px;
         padding: 0 2px;
