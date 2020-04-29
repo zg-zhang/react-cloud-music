@@ -54,6 +54,7 @@
 * better-scroll@next
 * prop-types
 * axios 
+* react-lazyload
 
 ## TODO
 
