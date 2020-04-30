@@ -1,13 +1,36 @@
-import React, {forwardRef, useState, useRef, useEffect, useImperativeHandle} from "react";
+import React, {forwardRef, useState, useRef, useEffect, useImperativeHandle, useMemo} from "react";
 import PropTypes from 'prop-types';
 import BScroll from 'better-scroll';
 import styled from "styled-components";
+
+import Loading from "../loading";
+import LoadingV2 from "../loading-v2";
+import { debounce } from "../../api/utils";
 
 const ScrollContainer = styled.div`
     width: 100%;
     height: 100%;
     overflow: hidden;
 `
+
+const PullUpLoading = styled.div`
+  position: absolute;
+  left:0; right:0;
+  bottom: 5px;
+  width: 60px;
+  height: 60px;
+  margin: auto;
+  z-index: 100;
+`;
+
+export const PullDownLoading = styled.div`
+  position: absolute;
+  left:0; right:0;
+  top: 0px;
+  height: 30px;
+  margin: auto;
+  z-index: 100;
+`;
 
 // Scroll 组件在业务中会被经常取到原生 DOM 对象，而函数式组件天生
 const Scroll = forwardRef((props, ref) => {
@@ -18,7 +41,7 @@ const Scroll = forwardRef((props, ref) => {
 
     // 解构赋值
     const { direction, click, refresh, bounceTop, bounceBottom } = props;
-    const { pullUp, pullDown, onScroll } = props;
+    const { pullUp, pullDown, onScroll, pullUpLoading, pullDownLoading } = props;
 
     // 创建 better-scroll
     useEffect(() => {
@@ -49,30 +72,46 @@ const Scroll = forwardRef((props, ref) => {
         }
     }, [onScroll, bScroll])
 
+    let pullUpDebounce = useMemo(() => {
+        return debounce(pullUp, 500);
+    }, [pullUp]);
+    // 这里不能省略依赖
+    // 不然拿到的始终是第一次的 pullUp 函数的引用，相应的闭包作用域变量都是第一次的，产生闭包陷阱，下同
+
+    let pullDownDebouce = useMemo(() => {
+        return debounce(pullDown, 500);
+    }, [pullDown])
+    // 之后直接使用 useMemo 返回的函数
+
     // 进行上拉到底的判断，调用上拉刷新的函数
     useEffect(() => {
         if (!bScroll || !pullUp) return;
-        bScroll.on('scrollEnd', () => {
+        const handlePullUp = () => {
             // 判断是否滑到了底部
             if (bScroll.y <= bScroll.maxScrollY + 100) {
                 pullUp();
             }
-        })
-    }, [pullUp, bScroll])
+        }
+        bScroll.on('scrollEnd', handlePullUp);
+        return () => {
+            bScroll.off('scrollEnd', handlePullUp)
+        }
+    }, [pullUp, pullUpDebounce, bScroll])
 
     // 进行下拉的判断，调用下拉刷新的函数
     useEffect(() => {
         if (!bScroll || !pullDown) return;
-        bScroll.on('touchEnd', (pos) => {
+        const handlePullDown = pos => {
             // 判断用户的下拉动作
             if (pos.y > 50) {
                 pullDown();
             }
-        });
-        return () => {
-            bScroll.off('touchEnd');
         }
-    }, [pullDown, bScroll])
+        bScroll.on('touchEnd', handlePullDown);
+        return () => {
+            bScroll.off('touchEnd', handlePullDown);
+        }
+    }, [pullDown, pullDownDebouce, bScroll])
 
     // 每次重新渲染都要刷新实例，防止无法滑动
     useEffect(() => {
@@ -98,9 +137,16 @@ const Scroll = forwardRef((props, ref) => {
         }
     }))
 
+    const pullUpDisplayStyle = pullUpLoading ? {display: ""} : {display: "none"};
+    const pullDownDisplayStyle = pullDownLoading ? {display: ''} : {display: 'none'};
+
     return (
         <ScrollContainer ref={scrollContainerRef}>
             {props.children}
+            {/* 滑倒底部的加载动画 */}
+            <PullUpLoading style={pullUpDisplayStyle}><Loading/></PullUpLoading>
+            {/* 下拉刷新的动画 */}
+            <PullDownLoading style={pullDownDisplayStyle}><LoadingV2/></PullDownLoading>
         </ScrollContainer>
     )
 })
