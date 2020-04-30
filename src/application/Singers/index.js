@@ -4,7 +4,7 @@ import LazyLoad, {forceCheck} from 'react-lazyload';
 
 import Horizen from "../../baseUI/horizen-item";
 import Scroll from "../../baseUI/scroll";
-
+import Loading from "../../baseUI/loading";
 import { typeTypes, areaTypes, alphaTypes } from '../../api/config';
 import {
     List,
@@ -95,6 +95,7 @@ function Singer (props) {
                 oldVal={alpha}
                 title={"筛选："}/>
             <ListContainer>
+                <Loading show={enterLoading}/>
                 <Scroll
                     onScroll={forceCheck}
                     pullUp={handlePullUp}

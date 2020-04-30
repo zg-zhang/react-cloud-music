@@ -57,7 +57,6 @@ export const refreshSingerList = (type, area, alpha) => {
         const singerList = getState().getIn(['singers', 'singerList']).toJS();
         getSingerListRequest(type, area, alpha, pageCount).then(res => {
             const data = [...singerList, ...res.artists];
-            console.log(data);
             dispatch(changeSingerList(data));
             dispatch(changePullUpLoading(false));
         }).catch(err => {
