@@ -1,6 +1,7 @@
 import React, {useEffect} from "react";
 import { connect } from 'react-redux';
 import { forceCheck } from 'react-lazyload';
+import { renderRoutes } from "react-router-config";
 
 import Slider from "../../components/slider";
 import RecommendList from "../../components/list";
@@ -41,6 +42,8 @@ function Recommend (props) {
                 </div>
             </Scroll>
             { enterLoading ? <Loading/> : [] }
+            // 将目前所在路由的下一层子路由加以渲染
+            { renderRoutes(props.route.routes) }
         </Content>
     )
 }

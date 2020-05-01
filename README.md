@@ -55,6 +55,7 @@
 * prop-types
 * axios 
 * react-lazyload
+* react-transition-group
 
 ## TODO
 
