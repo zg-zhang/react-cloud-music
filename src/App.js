@@ -7,6 +7,7 @@ import { GlobalStyle } from "./style";
 import { IconStyle } from "./assets/iconfont/iconfont"
 import routes from './routes/index.js';
 import store from "./store/index";
+import { Data } from "./application/Singers/data";
 
 function App() {
     return (
@@ -14,7 +15,9 @@ function App() {
             <HashRouter>
                 <GlobalStyle/>
                 <IconStyle/>
-                { renderRoutes(routes) }
+                <Data>
+                    { renderRoutes(routes) }
+                </Data>
             </HashRouter>
         </Provider>
     );

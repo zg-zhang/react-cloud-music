@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useContext} from "react";
 import { connect } from 'react-redux';
 import LazyLoad, {forceCheck} from 'react-lazyload';
 
@@ -19,31 +19,34 @@ import {
     changePullDownLoading,
     refreshSingerList
 } from "./store/actionCreators";
+import {CHANGE_ALPHA, CHANGE_AREA, CHANGE_TYPE, TypeAreaDataContext} from "./data";
 
 function Singer (props) {
-    const [type, setType] = useState('-1');
-    const [area, setArea] = useState('-1');
-    const [alpha, setAlpha] = useState('-1');
+    const {data, dispatch} = useContext(TypeAreaDataContext);
+
+    const {type, area, alpha} = data.toJS();
 
     const { singerList, pageCount, enterLoading, pullUpLoading, pullDownLoading } = props;
     const { getSingerListDispatch, updateDispatch, pullUpRefreshDispatch, pullDownRefreshDispatch } = props;
 
     useEffect(() => {
-        getSingerListDispatch(type, area, alpha)
+        if (!singerList.size) {
+            getSingerListDispatch(type, area, alpha)
+        }
     }, [])
 
     let handleUpdateType = val => {
-        setType(val);
+        dispatch({type: CHANGE_TYPE, data: val});
         updateDispatch(val, area, alpha)
     }
 
     let handleUpdateArea = val => {
-        setArea(val);
+        dispatch({type: CHANGE_AREA, data: val});
         updateDispatch(type, val, alpha);
     }
 
     let handleUpdateAlpha = val => {
-        setAlpha(val);
+        dispatch({type: CHANGE_ALPHA, data: val});
         updateDispatch(type, area, val);
     }
 
