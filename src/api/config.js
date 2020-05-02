@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const baseUrl = 'http://192.168.0.113:8080';
+export const baseUrl = 'http://192.168.0.108:8080';
 
 // axios 的实例及拦截器配置
 const axiosInstance = axios.create({
