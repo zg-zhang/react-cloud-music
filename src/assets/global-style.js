@@ -18,7 +18,7 @@ const extendClick = () => {
 const nowrap = () => {
     return `
         text-overflow: ellipsis;
-        over-flow: hidden;
+        overflow: hidden;
         white-space: nowrap;
     `
 }

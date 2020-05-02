@@ -213,7 +213,7 @@ export const SongList = styled.div`
 }
 `
 export const SongItem = styled.ul`
-  >li {
+  > li {
     display: flex;
     height: 60px;
     align-items: center;  
@@ -234,13 +234,16 @@ export const SongItem = styled.ul`
       justify-content: space-around;
       border-bottom: 1px solid ${style["border-color"]};
       ${style.nowrap()}
-      >span {
+      
+      > span {
         ${style.nowrap()}
       }
-      >span:first-child {
+      
+      > span:first-child {
         color: ${style["font-color-desc"]};
       }
-      >span:last-child {
+      
+      > span:last-child {
         font-size: ${style["font-size-s"]};
         color: #bba8a8;
       }
