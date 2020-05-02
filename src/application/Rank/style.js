@@ -61,8 +61,8 @@ export const ListItem = styled.div`
             position: absolute;
             left: 7px;
             bottom: 7px;
-            font-size: ${style ["font-size-ss"]};
-            color: ${style ["font-color-light"]};
+            font-size: ${style["font-size-ss"]};
+            color: ${style["font-color-light"]};
         }
     }
 `
@@ -73,9 +73,11 @@ export const SongList = styled.ul`
     flex-direction: column;
     justify-content: space-around;
     padding: 10px 10px;
+    ${style.nowrap()}
     
     >li {
-        font-size: ${style ["font-size-s"]};
+        ${style.nowrap()}
+        font-size: ${style["font-size-s"]};
         color: grey;
     }
 `;
