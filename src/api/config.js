@@ -1,10 +1,20 @@
 import axios from 'axios';
 
-export const baseUrl = 'http://192.168.0.108:8080';
+export const baseUrl = `http://192.168.0.113:8080`;
+
+//顶部的高度
+export const HEADER_HEIGHT = 45;
+
+//播放模式
+export const playMode = {
+    sequence: 0,
+    loop: 1,
+    random: 2
+};
 
 // axios 的实例及拦截器配置
 const axiosInstance = axios.create({
-    baseURL: baseUrl
+    baseURL: baseUrl,
 })
 
 axiosInstance.interceptors.response.use(
