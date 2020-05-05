@@ -6,7 +6,7 @@ export const ListContainer = styled.div`
     top: 208px;
     left: 0;
     right: 0;
-    bottom: 0;
+    bottom: ${props => props.play > 0?"60px": 0};
     overflow: hidden;
     width: 100%;
 `

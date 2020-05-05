@@ -16,9 +16,10 @@ import Scroll from "../../baseUI/scroll";
 import {changeEnterLoading, getSingerInfo} from "./store/actionCreators";
 import Loading from "../../baseUI/loading";
 import MusicNote from "../../baseUI/music-note";
+import {Content} from "../Recommend/style";
 
 function Singer (props) {
-    const { artist, songs, loading } = props;
+    const { artist, songs, loading, songsCount } = props;
     const { getSingerDataDispatch } = props;
 
     const [showStatus, setShowStatus] = useState (true);
@@ -109,7 +110,7 @@ function Singer (props) {
             unmountOnExit
             onExited={() => props.history.goBack()}
         >
-            <Container>
+            <Container play={songsCount}>
                 <Header title={artist.name} handleClick={setShowStatusFalse} ref={header}/>
                 <ImgWrapper ref={imageWrapper} bgUrl={artist.picUrl}>
                     <div className='filter'/>
@@ -134,7 +135,8 @@ function Singer (props) {
 const mapStateToProps = state => ({
     artist: state.getIn(['singerInfo', 'artist']).toJS(),
     songs: state.getIn(['singerInfo', 'songsOfArtist']).toJS(),
-    loading: state.getIn(['singerInfo', 'loading'])
+    loading: state.getIn(['singerInfo', 'loading']),
+    songsCount: state.getIn (['player', 'playList']).size
 })
 
 const mapDispatchToProps = dispatch => {

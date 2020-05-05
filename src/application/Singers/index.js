@@ -21,13 +21,14 @@ import {
     refreshSingerList
 } from "./store/actionCreators";
 import {CHANGE_ALPHA, CHANGE_AREA, CHANGE_TYPE, TypeAreaDataContext} from "./data";
+import {Content} from "../Recommend/style";
 
 function Singer (props) {
     const {data, dispatch} = useContext(TypeAreaDataContext);
 
     const {type, area, alpha} = data.toJS();
 
-    const { singerList, pageCount, enterLoading, pullUpLoading, pullDownLoading } = props;
+    const { singerList, pageCount, enterLoading, pullUpLoading, pullDownLoading, songsCount } = props;
     const { getSingerListDispatch, updateDispatch, pullUpRefreshDispatch, pullDownRefreshDispatch } = props;
 
     useEffect(() => {
@@ -102,7 +103,7 @@ function Singer (props) {
                 handleClick={handleUpdateAlpha}
                 oldVal={alpha}
                 title={"筛选："}/>
-            <ListContainer>
+            <ListContainer play={songsCount}>
                 <Loading show={enterLoading}/>
                 <Scroll
                     onScroll={forceCheck}
@@ -125,7 +126,8 @@ const mapStateToProps = state => ({
     pageCount: state.getIn(['singers', 'pageCount']),
     enterLoading: state.getIn(['singers', 'enterLoading']),
     pullUpLoading: state.getIn(['singers', 'pullUpLoading']),
-    pullDownLoading: state.getIn(['singers', 'pullDownLoading'])
+    pullDownLoading: state.getIn(['singers', 'pullDownLoading']),
+    songsCount: state.getIn (['player', 'playList']).size
 });
 
 const mapDispatchToProps = dispatch => {

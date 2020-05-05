@@ -18,6 +18,7 @@ import { isEmptyObject, getCount } from "../../api/utils";
 import Loading from "../../baseUI/loading";
 import SongsList from "../SongsList";
 import MusicNote from "../../baseUI/music-note";
+import {Content} from "../Recommend/style";
 
 export const HEADER_HEIGHT = 45;
 
@@ -27,7 +28,7 @@ function Album(props) {
     const headerEl = useRef();
     const musicNoteRef = useRef();
 
-    const { currentAlbum:currentAlbumImmutable, enterLoading } = props;
+    const { currentAlbum:currentAlbumImmutable, enterLoading, songsCount } = props;
     const { getAlbumDataDispatch } = props;
 
     const [showStatus, setShowStatus] = useState(true);
@@ -125,7 +126,7 @@ function Album(props) {
             unmountOnExit
             onExited={props.history.goBack}
         >
-            <Container>
+            <Container play={songsCount}>
                 {enterLoading ? <Loading/> : []}
                 <Header ref={headerEl} title={title} handleClick={handleBack} isMarquee={isMarquee}/>
                 {!isEmptyObject(currentAlbum) ? (
@@ -151,7 +152,8 @@ function Album(props) {
 
 const mapStateToProps = state => ({
     currentAlbum: state.getIn(['album', 'currentAlbum']),
-    enterLoading: state.getIn(['album', 'enterLoading'])
+    enterLoading: state.getIn(['album', 'enterLoading']),
+    songsCount: state.getIn (['player', 'playList']).size
 })
 
 const mapDispatchToProps = dispatch => {

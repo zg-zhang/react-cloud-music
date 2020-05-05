@@ -31,6 +31,8 @@ function Player(props) {
     const audioRef = useRef();
     const toastRef = useRef();
 
+    const songReady = useRef(true)
+
     // 目前播放时间
     const [currentTime, setCurrentTime] = useState(0)
     // 歌曲总时长
@@ -39,7 +41,6 @@ function Player(props) {
     // 记录当前的歌曲，以便于下次重渲染时对比是否是一首歌
     const [preSong, setPreSong] = useState({});
     const [modeText, setModeText] = useState('');
-    const [songReady, setSongReady] = useState(true);
 
     // 歌曲播放进度
     let percent = isNaN(currentTime / duration) ? 0 : currentTime / duration;
@@ -154,6 +155,12 @@ function Player(props) {
         }
     }
 
+    const handleError = () => {
+        songReady.current = true;
+        handleNext();
+        alert('播放出错');
+    }
+
     return (
         <div>
             { isEmptyObject(currentSong) ? null :
@@ -183,7 +190,7 @@ function Player(props) {
                     changeMode={changeMode}
                 />
             }
-            <audio ref={audioRef} onTimeUpdate={updateTime} onEnded={handleEnd}/>
+            <audio ref={audioRef} onTimeUpdate={updateTime} onEnded={handleEnd} onError={handleError}/>
             <Toast text={modeText} ref={toastRef}/>
         </div>
     )
