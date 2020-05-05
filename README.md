@@ -56,6 +56,7 @@
 * axios 
 * react-lazyload
 * react-transition-group
+* create-keyframe-animation
 
 ## TODO
 

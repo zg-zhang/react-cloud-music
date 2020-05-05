@@ -1,15 +1,25 @@
 import React from 'react';
+import {connect} from 'react-redux';
+
 import { SongList, SongItem } from "./style";
 import { getName } from '../../api/utils';
+import { changePlayList, changeCurrentIndex, changeSequencePlayList} from "../player/store/actionCreators";
 
 const SongsList = React.forwardRef((props, refs)=> {
 
     const { collectCount, showCollect, songs } = props;
 
+    const { musicAnimation } = props;
+
+    const { changePlayListDispatch, changeCurrentIndexDispatch, changeSequencePlayListDispatch} = props;
+
     const totalCount = songs.length;
 
     const selectItem = (e, index) => {
-        console.log(index);
+        changePlayListDispatch(songs);
+        changeSequencePlayListDispatch(songs);
+        changeCurrentIndexDispatch(index);
+        musicAnimation(e.nativeEvent.clientX, e.nativeEvent.clientY);
     }
 
     let songList = (list) => {
@@ -22,8 +32,8 @@ const SongsList = React.forwardRef((props, refs)=> {
                     <div className="info">
                         <span>{item.name}</span>
                         <span>
-              { item.ar ? getName(item.ar): getName(item.artists) } - { item.al ? item.al.name : item.album.name}
-            </span>
+                            { item.ar ? getName(item.ar): getName(item.artists) } - { item.al ? item.al.name : item.album.name}
+                        </span>
                     </div>
                 </li>
             )
@@ -58,4 +68,18 @@ const SongsList = React.forwardRef((props, refs)=> {
     )
 });
 
-export default React.memo(SongsList);
+const mapDispatchToProps = dispatch => {
+    return {
+        changePlayListDispatch(data) {
+            dispatch(changePlayList(data))
+        },
+        changeCurrentIndexDispatch(data) {
+            dispatch(changeCurrentIndex(data))
+        },
+        changeSequencePlayListDispatch(data) {
+            dispatch(changeSequencePlayList(data))
+        }
+    }
+}
+
+export default connect(null, mapDispatchToProps)(React.memo(SongsList));
