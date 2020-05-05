@@ -17,6 +17,7 @@ import {changeEnterLoading, getAlbumList} from "./store/actionCreators";
 import { isEmptyObject, getCount } from "../../api/utils";
 import Loading from "../../baseUI/loading";
 import SongsList from "../SongsList";
+import MusicNote from "../../baseUI/music-note";
 
 export const HEADER_HEIGHT = 45;
 
@@ -24,6 +25,7 @@ function Album(props) {
     const id = props.match.params.id;
 
     const headerEl = useRef();
+    const musicNoteRef = useRef();
 
     const { currentAlbum:currentAlbumImmutable, enterLoading } = props;
     const { getAlbumDataDispatch } = props;
@@ -59,6 +61,10 @@ function Album(props) {
             setIsMarquee(false);
         }
     }, [currentAlbum])
+
+    const musicAnimation = (x, y) => {
+        musicNoteRef.current.startAnimation ({ x, y });
+    };
 
     const renderTopDesc = () => {
         return (
@@ -132,10 +138,12 @@ function Album(props) {
                                 showCollect={true}
                                 showBackground={true}
                                 songs={currentAlbum.tracks}
+                                musicAnimation={musicAnimation}
                             />
                         </div>
                     </Scroll>
                 ) : []}
+                <MusicNote ref={musicNoteRef}/>
             </Container>
         </CSSTransition>
     )

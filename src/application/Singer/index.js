@@ -15,6 +15,7 @@ import SongsList from "../SongsList";
 import Scroll from "../../baseUI/scroll";
 import {changeEnterLoading, getSingerInfo} from "./store/actionCreators";
 import Loading from "../../baseUI/loading";
+import MusicNote from "../../baseUI/music-note";
 
 function Singer (props) {
     const { artist, songs, loading } = props;
@@ -28,6 +29,11 @@ function Singer (props) {
     const songScroll = useRef();
     const header = useRef();
     const layer = useRef();
+    const musicNoteRef = useRef();
+
+    const musicAnimation = (x, y) => {
+        musicNoteRef.current.startAnimation({x, y});
+    }
 
     // 图片初始高度
     const initialHeight = useRef(0);
@@ -115,10 +121,11 @@ function Singer (props) {
                 <BgLayer ref={layer}/>
                 <SongListWrapper ref={songScrollWrapper}>
                     <Scroll onScroll={handleScroll} ref={songScroll}>
-                        <SongsList showCollect={false} songs={songs}/>
+                        <SongsList musicAnimation={musicAnimation} showCollect={false} songs={songs}/>
                     </Scroll>
                 </SongListWrapper>
                 {loading ? <Loading/> : []}
+                <MusicNote ref={musicNoteRef}/>
             </Container>
         </CSSTransition>
     )
