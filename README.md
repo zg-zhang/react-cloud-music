@@ -57,6 +57,7 @@
 * react-lazyload
 * react-transition-group
 * create-keyframe-animation
+* fastclick
 
 ## TODO
 

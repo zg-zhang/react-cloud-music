@@ -1,5 +1,4 @@
 import {
-    getHotSingerListRequest,
     getSingerListRequest
 } from "../../../api/request";
 import {
@@ -7,12 +6,27 @@ import {
     CHANGE_PAGE_COUNT,
     CHANGE_ENTER_LOADING,
     CHANGE_PULLUP_LOADING,
-    CHANGE_PULLDOWN_LOADING
+    CHANGE_PULLDOWN_LOADING, CHANGE_TYPE, CHANGE_AREA, CHANGE_ALPHA
 } from "./constants";
 import { fromJS } from "immutable";
 
 const changeSingerList = (data) => ({
     type: CHANGE_SINGER_LIST,
+    data: fromJS(data)
+})
+
+export const changeType = data => ({
+    type: CHANGE_TYPE,
+    data: fromJS(data)
+})
+
+export const changeArea = data => ({
+    type: CHANGE_AREA,
+    data: fromJS(data)
+})
+
+export const changeAlpha = data => ({
+    type: CHANGE_ALPHA,
     data: fromJS(data)
 })
 

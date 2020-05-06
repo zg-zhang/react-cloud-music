@@ -1,26 +1,23 @@
-import React from 'react';
-import { renderRoutes } from "react-router-config";
-import { HashRouter } from "react-router-dom";
-import { Provider } from 'react-redux';
-
+import React from "react";
+import { Provider } from "react-redux";
 import { GlobalStyle } from "./style";
-import { IconStyle } from "./assets/iconfont/iconfont"
-import routes from './routes/index.js';
+import { renderRoutes } from "react-router-config";
+import { IconStyle } from "./assets/iconfont/iconfont";
 import store from "./store/index";
-import { Data } from "./application/Singers/data";
+import routes from "./routes/index.js";
+import { HashRouter } from "react-router-dom";
+import "./fix.css";
 
 function App() {
-    return (
-        <Provider store={store}>
-            <HashRouter>
-                <GlobalStyle/>
-                <IconStyle/>
-                <Data>
-                    { renderRoutes(routes) }
-                </Data>
-            </HashRouter>
-        </Provider>
-    );
+  return (
+    <Provider store={store}>
+      <HashRouter>
+        <GlobalStyle></GlobalStyle>
+        <IconStyle></IconStyle>
+        {renderRoutes(routes)}
+      </HashRouter>
+    </Provider>
+  );
 }
 
 export default App;

@@ -12,7 +12,11 @@ import {
     ListItem,
     ListContainer
 } from "./style";
+
 import {
+    changeType,
+    changeArea,
+    changeAlpha,
     getSingerList,
     changePageCount,
     changeEnterLoading,
@@ -20,35 +24,31 @@ import {
     changePullDownLoading,
     refreshSingerList
 } from "./store/actionCreators";
-import {CHANGE_ALPHA, CHANGE_AREA, CHANGE_TYPE, TypeAreaDataContext} from "./data";
-import {Content} from "../Recommend/style";
 
 function Singer (props) {
-    const {data, dispatch} = useContext(TypeAreaDataContext);
+    const { type, area, alpha, singerList, pageCount, enterLoading, pullUpLoading, pullDownLoading, songsCount } = props;
+    const { changeTypeDispatch, changeAreaDispatch, changeAlphaDispatch, getSingerListDispatch, updateDispatch, pullUpRefreshDispatch, pullDownRefreshDispatch } = props;
 
-    const {type, area, alpha} = data.toJS();
-
-    const { singerList, pageCount, enterLoading, pullUpLoading, pullDownLoading, songsCount } = props;
-    const { getSingerListDispatch, updateDispatch, pullUpRefreshDispatch, pullDownRefreshDispatch } = props;
 
     useEffect(() => {
+        console.log(enterLoading);
         if (!singerList.size) {
             getSingerListDispatch(type, area, alpha)
         }
     }, [])
 
     let handleUpdateType = val => {
-        dispatch({type: CHANGE_TYPE, data: val});
+        changeTypeDispatch(val);
         updateDispatch(val, area, alpha)
     }
 
     let handleUpdateArea = val => {
-        dispatch({type: CHANGE_AREA, data: val});
+        changeAreaDispatch(val);
         updateDispatch(type, val, alpha);
     }
 
     let handleUpdateAlpha = val => {
-        dispatch({type: CHANGE_ALPHA, data: val});
+        changeAlphaDispatch(val);
         updateDispatch(type, area, val);
     }
 
@@ -104,7 +104,6 @@ function Singer (props) {
                 oldVal={alpha}
                 title={"筛选："}/>
             <ListContainer play={songsCount}>
-                <Loading show={enterLoading}/>
                 <Scroll
                     onScroll={forceCheck}
                     pullUp={handlePullUp}
@@ -122,6 +121,9 @@ function Singer (props) {
 }
 
 const mapStateToProps = state => ({
+    type: state.getIn(['singers', 'type']),
+    area: state.getIn(['singers', 'area']),
+    alpha: state.getIn(['singers', 'alpha']),
     singerList: state.getIn(['singers', 'singerList']),
     pageCount: state.getIn(['singers', 'pageCount']),
     enterLoading: state.getIn(['singers', 'enterLoading']),
@@ -134,6 +136,15 @@ const mapDispatchToProps = dispatch => {
     return {
         getSingerListDispatch(type, area, alpha) {
             dispatch(getSingerList(type, area, alpha));
+        },
+        changeTypeDispatch(data) {
+            dispatch(changeType(data));
+        },
+        changeAreaDispatch(data) {
+            dispatch(changeArea(data));
+        },
+        changeAlphaDispatch(data) {
+            dispatch(changeAlpha(data));
         },
         updateDispatch(type, area, alpha) {
             dispatch(changePageCount(0));   // 由于改变了分类，所以 pageCount 清零

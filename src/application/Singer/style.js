@@ -1,4 +1,4 @@
-import styled from'styled-components';
+import styled from 'styled-components';
 import style from '../../assets/global-style';
 
 export const Container = styled.div`
@@ -6,23 +6,23 @@ export const Container = styled.div`
   top: 0;
   left: 0;
   right: 0;
-  bottom: ${props => props.play > 0 ? "60px" : 0};
+  bottom: ${props => props.play > 0 ? "60px": 0};
   width: 100%;
   z-index: 100;
   overflow: hidden;
   background: #f2f3f4;
   transform-origin: right bottom;
-  &.fly-enter, &.fly-appear {
+  &.fly-enter, &.fly-appear{
     transform: rotateZ(30deg) translate3d(100%, 0, 0);
   }
-  &.fly-enter-active, &.fly-appear-active {
+  &.fly-enter-active, &.fly-appear-active{
     transition: transform .3s;
     transform: rotateZ(0deg) translate3d(0, 0, 0);
   }
-  &.fly-exit {
-    transform: rotateZ(0deg) translate3d(0, 0, 0);+
+  &.fly-exit{
+    transform: rotateZ(0deg) translate3d(0, 0, 0);
   }
-  &.fly-exit-active {
+  &.fly-exit-active{
     transition: transform .3s;
     transform: rotateZ(30deg) translate3d(100%, 0, 0);
   }
@@ -43,14 +43,13 @@ export const ImgWrapper = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
+    /* : blur(20px); */
     background: rgba(7, 17, 27, 0.3);
   }
 `
-
 export const CollectButton = styled.div`
-  position: absolute;
-  left: 0; 
-  right: 0;
+  position: fixed;
+  left: 0; right: 0;
   margin: auto;
   box-sizing: border-box;
   width: 120px;
@@ -63,7 +62,7 @@ export const CollectButton = styled.div`
   text-align: center;
   font-size: 0;
   line-height: 40px;
-  .iconfont {
+  .iconfont{
     display: inline-block;
     margin-right: 10px;
     font-size: 12px;
@@ -81,16 +80,15 @@ export const SongListWrapper = styled.div`
   z-index: 50;
   top: 0;
   left: 0;
-  bottom: 0;
+  bottom: ${props => props.play ? "60px": 0};
   right: 0;
-  >div {
+  >div{
     position: absolute;
     left: 0;
     width: 100%;
     overflow: visible;
   }
 `
-
 export const BgLayer = styled.div`
   position: absolute;
   top: 0;

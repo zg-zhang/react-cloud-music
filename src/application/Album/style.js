@@ -1,77 +1,65 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 import style from '../../assets/global-style';
 
 export const Container = styled.div`
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: ${props => props.play > 0?"60px": 0};
-    z-index: 1000;
-    background: ${style["background-color"]};
-    transform-origin: right bottom;
-    
-    &.fly-enter, &.fly-appear {
-        transform: rotateZ(30deg) translate3d(100%, 0, 0);
-    }
-    &.fly-enter-active, &.fly-appear-active {
-        transition: transform .3s;
-        transform: rotateZ(0deg) translate3d(0, 0, 0);
-    }
-    &.fly-exit {
-        transform: rotateZ(0deg) translate3d(0, 0, 0);
-    }
-    &.fly-exit-active {
-        transition: transform .3s;
-        transform: rotateZ(30deg) translate3d(100%, 0, 0);
-    }
-`;
-
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: ${props => props.play > 0 ? "60px": 0};
+  width: 100%;
+  z-index: 100;
+  overflow: hidden;
+  background: #f2f3f4;
+  transform-origin: right bottom;
+  &.fly-enter, &.fly-appear{
+    transform: rotateZ(30deg) translate3d(100%, 0, 0);
+  }
+  &.fly-enter-active, &.fly-appear-active{
+    transition: transform .3s;
+    transform: rotateZ(0deg) translate3d(0, 0, 0);
+  }
+  &.fly-exit{
+    transform: rotateZ(0deg) translate3d(0, 0, 0);
+  }
+  &.fly-exit-active{
+    transition: transform .3s;
+    transform: rotateZ(30deg) translate3d(100%, 0, 0);
+  }
+`
 export const TopDesc = styled.div`
   background-size: 100%;
-  padding: 5px 20px 50px;
-  margin-bottom: 20px;
+  padding: 5px 20px;
   display: flex;
-  justify-content: space-around;
   align-items: center;
+  justify-content: space-around;
   box-sizing: border-box;
   width: 100%;
-  height: 275px;
+  height: 200px;
   position: relative;
-  
-  .background {
-    z-index: -1;
+  z-index: 100;
+  .background{
+    /* z-index: -1; */
     background: url(${props => props.background}) left top no-repeat;
-    background-size: 100% 100%;
+
     position: absolute;
     width: 100%;
     height: 100%;
     filter: blur(20px);
-    
-    .filter {
-      position: absolute;
-      z-index: 10;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(7, 17, 27, 0.2);
-    }
+    transform: scale(1.5);
   }
-  
-  .img_wrapper {
+  .img_wrapper{
     width: 120px;
     height: 120px;
-    position: relative;      
-       
+    position: relative;         
     .decorate {
       position: absolute;
       top: 0;
       width: 100%;
       height: 35px;
       border-radius: 3px;
-      background: linear-gradient(hsla(0,0%,43%,.4), hsla(0,0%,100%,0));
+      background: linear-gradient(hsla(0,0%,43%,.4),hsla(0,0%,100%,0));
     }
-    
     .play_count {
       position: absolute;
       right: 2px;
@@ -79,18 +67,16 @@ export const TopDesc = styled.div`
       font-size: ${style["font-size-s"]};
       line-height: 15px;
       color: ${style["font-color-light"]};
-      .play {
+      .play{
         vertical-align: top;
       }
     }
-    
-    img {
+    img{
       width: 120px;
       height: 120px;
       border-radius:3px;
     }
   }
-  
   .desc_wrapper {
     flex: 1;
     display: flex;
@@ -98,75 +84,71 @@ export const TopDesc = styled.div`
     justify-content: space-around;
     height: 120px;
     padding: 0 10px;
-    
-    .title {
+    .title{
       max-height: 70px;
-      color: ${style["font-color-light"]};
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: ${style["font-color-desc"]};
       font-weight: 700;
       line-height: 1.5;
       font-size: ${style["font-size-l"]};
     }
-    
-    .person {
+    .person{
       display: flex;
-      
-      .avatar {
+      .avatar{
         width: 20px;
         height: 20px;
         margin-right: 5px;
-        
-        img {
+        img{
           width: 100%;
           height: 100%;
           border-radius: 50%;
         }
       }
-      
       .name {
         line-height: 20px;
         font-size: ${style["font-size-m"]};
-        color: ${style["font-color-desc-v2"]};
+        color: ${style["font-color-desc"]};
       }
     }
   }
-`;
+`
 
 export const Menu = styled.div`
   position: relative;
   display: flex;
   justify-content: space-between;
   box-sizing: border-box;
-  padding: 0 30px 20px 30px;
-  margin: -100px 0 0 0;
-  
-  > div {
+  margin: 0 30px;
+  margin-top: -20px;
+  margin-bottom: 10px;
+  >div {
     display: flex;
     flex-direction: column;
     line-height: 20px;
     text-align: center;
     font-size: ${style["font-size-s"]};
-    color: ${style["font-color-light"]};
+    color: #3b1f1f;
+    color: ${style["font-color-desc"]};
     z-index:1000;
     font-weight: 500;
-    
     .iconfont {
       font-size: 20px;
     }
   }
-`;
+`
 
 export const SongList = styled.div`
   border-radius: 10px;
   opacity: 0.98;
-  ${props => props.showBackground ? `background: ${style["highlight-background-color"]}`: ""}
-  .first_line {
+  .first_line{
     box-sizing: border-box;
     padding: 10px 0;
     margin-left: 10px;
     position: relative;
     justify-content: space-between;
     border-bottom: 1px solid ${style["border-color"]};
-    .play_all {
+    .play_all{
       display: inline-block;
       line-height: 24px;
       color: ${style["font-color-desc"]};
@@ -175,19 +157,19 @@ export const SongList = styled.div`
         margin-right: 10px;
         vertical-align: top;
       }
-      .sum {
+      .sum{
         font-size: ${style["font-size-s"]};
         color: ${style["font-color-desc-v2"]};
       }
-      >span {
+      >span{
         vertical-align: top;
       }
     }
-    .add_list,.isCollected {
+    .add_list {
       display: flex;
       align-items: center;
       position: absolute;
-      right: 0; top :0; bottom: 0;
+      right: 0; top :0px; bottom: 0;
       width: 130px;
       line-height: 34px;
       background: ${style["theme-color"]};
@@ -200,31 +182,25 @@ export const SongList = styled.div`
         font-size: 10px;
         margin: 0 5px 0 10px;
       }
-      span {
+      span{
         font-size: 14px;
         line-height: 34px;
       }
-    }
-    .isCollected {
-      display: flex;
-      background: ${style["background-color"]};
-      color: ${style["font-color-desc"]};
-    }
+  }
 }
 `
 export const SongItem = styled.ul`
-  > li {
+  >li{
     display: flex;
     height: 60px;
     align-items: center;  
-    .index {
-      flex-basis: 60px;
+    .index{
       width: 60px;
       height: 60px;
       line-height: 60px;
       text-align: center;
     }
-    .info {
+    .info{
       box-sizing: border-box;
       flex: 1;
       display: flex;
@@ -233,20 +209,15 @@ export const SongItem = styled.ul`
       flex-direction: column;
       justify-content: space-around;
       border-bottom: 1px solid ${style["border-color"]};
-      ${style.nowrap()}
-      
-      > span {
-        ${style.nowrap()}
-      }
-      
-      > span:first-child {
+      >span:first-child{
         color: ${style["font-color-desc"]};
       }
-      
-      > span:last-child {
+      >span:last-child{
         font-size: ${style["font-size-s"]};
         color: #bba8a8;
       }
     }
   }
 `
+
+
