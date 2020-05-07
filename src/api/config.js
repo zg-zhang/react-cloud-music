@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const baseUrl = "http://localhost:8080";
+export const baseUrl = "http://gouza.org.cn:10001";
 
 // axios的实例及拦截器配置
 const axiosInstance = axios.create({
